@@ -9,7 +9,7 @@ import { FacebookService, InitParams } from 'ngx-facebook';
 export class FbappComponent {
   constructor(private fb: FacebookService, private http: Http) {
     this.fb.init({
-      appId: '301808607003765',
+      appId: '',
       xfbml: true,
       version: 'v2.8'
     });
