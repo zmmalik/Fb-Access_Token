@@ -1,0 +1,82 @@
+schemas: {
+        signUp: joi.object().keys({
+            email: joi.string().email().lowercase().required(),
+            password: joi.string().required().min(8).max(64),
+            is_sp: joi.boolean()
+        }),
+        signIn: joi.object().keys({
+            email: joi.string().email().lowercase().required(),
+            password: joi.string().required().min(8).max(64),
+        }),
+        verifyPassword: joi.object().keys({
+            password: joi.string().required().min(8).max(64)
+        }),
+        userProfileCreate: joi.object().keys({
+            dob: joi.string().required().min(10).max(10),
+            tel: joi.string().required().max(25).min(6)
+        }),
+        userProfileUpdate: joi.object().keys({
+            password: joi.string().min(8).max(64),
+            email: joi.string().email().lowercase(),
+            dob: joi.string().min(10).max(10),
+            tel: joi.string().max(25).min(6)
+        }),
+        spProfile: joi.object().keys({
+            email: joi.string().email().lowercase().required(),
+            company_name: joi.string().required().max(64),
+            tel: joi.string().required().min(4).max(20),
+            desc: joi.string(),
+            is_freelancer: joi.boolean().required(),
+            user_id: joi.number()
+        }),
+        spProfileLocationCreate: joi.object().keys({
+            id: joi.number().positive(),
+            location: joi.string().required().max(100),
+            name: joi.string().required().max(100),
+            desc: joi.string().max(255),
+            lat: joi.number().precision(6).required(),
+            lng: joi.number().precision(6).required(),
+        }),
+        spProfileLocationUpdate: joi.object().keys({
+            id: joi.number().positive().required(),
+            location: joi.string().required().max(100),
+            name: joi.string().required().max(100),
+            desc: joi.string().max(255),
+            lat: joi.number().precision(6).required(),
+            lng: joi.number().precision(6).required(),
+        }),
+        spProfileWorkingHoursGenSet: joi.array().items({
+            weekday: joi.number().integer().positive().max(7).required(),
+            hour_from: joi.string().max(8).required(),
+            hour_to: joi.string().max(8).required(),
+        }),
+        spProfileWorkingHoursSpecSet: joi.array().items({
+            time_from: joi.string().max(24).required(),
+            time_to: joi.string().max(24).required()
+        }),
+        appointmentCreate: joi.object().keys({
+            time: joi.string().max(24).required(),
+            sp_profile_location_id: joi.number().integer().positive().required(),
+            service_type_id: joi.number().integer().positive().required(),
+        }),
+        appointmentUpdate: joi.object().keys({
+            time: joi.string().max(24).required(),
+            id: joi.number().integer().positive().required(),
+        }),
+        spProfileServicesSet: joi.array().items(
+            joi.object().keys({
+                service_type_id: joi.number().integer().positive().required(),
+                duration: joi.number().integer().positive().required(),
+                price: joi.number().precision(2).positive().required()
+            }).required()),
+        reviewCreate: joi.object().keys({
+            appointment_id: joi.number().integer().positive().required(),
+            comment: joi.string().max(255),
+            rate: joi.number().integer().positive().required().min(1).max(5),
+        }),
+        reviewUpdate: joi.object().keys({
+            appointment_id: joi.number().integer().positive().required(),
+            comment: joi.string().max(255),
+            rate: joi.number().integer().positive().min(1).max(5),
+        }),
+    }

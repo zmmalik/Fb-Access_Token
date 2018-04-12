@@ -1,0 +1,39 @@
+<div class = "Error">
+    <div class = "Rectangle">
+        <div class = 'Rectangle-2'>
+            <div class = 'BEAUTY-BOX'>
+                <div class = "text-style-1">
+                    BEAUTY BOX
+                </div>
+            </div>
+        </div>
+        <div class = "Service-Engine-Search Align-Rest-Header">Service Engine Search</div>
+        <div class = "Login Align-Rest-Header">Login</div>
+        <div class = "Rectangle-4 Align-Rest-Header">
+            <button class = "Regular-Button text-style">For service providers</button>
+        </div>
+    </div>
+    <div class = "Facebook-Rectangle-4">
+        <button class = "Facebook text-style" (click) = "facebookLogin()">Log in through Facebook</button>
+    </div>
+    <div class = "OR Align-OR">OR</div>
+    <form class = "Login-Form" #Login = "ngForm" [formGroup] = "schema.LoginForm" (click) = "loginUser(schema.LoginForm.value)">
+        <input type = "text" class = "Login-Textbox" formControlName = "email" placeholder = "E-mail" />
+        <div>
+            <ng-container *ngFor = "let validation of validation_messages.email">
+                <div class = "error-message" *ngIf = "(schema.LoginForm.get('email').hasError(validation.type) && (schema.LoginForm.get('email').dirty || schema.LoginForm.get('email').touched)) || (schema.LoginForm.get('email').hasError(validation.type) && Login.submitted)">
+                    {{ validation.message }}
+                </div>
+            </ng-container>
+        </div>
+        <input type = "password" class = "Login-Textbox" formControlName = "password" placeholder = "Password" />
+        <div>
+            <ng-container *ngFor = "let validation of validation_messages.password">
+                <div class = "error-message" *ngIf = "(schema.LoginForm.get('password').hasError(validation.type) && (schema.LoginForm.get('password').dirty || schema.LoginForm.get('password').touched)) || (schema.LoginForm.get('password').hasError(validation.type) && Login.submitted)">
+                    {{ validation.message }}
+                </div>
+            </ng-container>
+        </div>
+        <button class = "Big-Button Adjust-Signin text-style">Sign In</button>
+    </form>
+</div>
